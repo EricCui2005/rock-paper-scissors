@@ -1,9 +1,12 @@
+// Returns a random computer choice for a game of rock, paper, scissors
 function getComputerChoice() {
     const choices = ["Rock", "Paper", "Scissors"];
     const randomIndex = Math.floor(Math.random() * choices.length);
     return choices[randomIndex];
 }
 
+// Function that plays a round of rock paper scissors and returns a value 
+// based on whether the player or computer wins
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == "Rock") {
         if (computerSelection == "Rock") {
@@ -42,24 +45,31 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function playGame() {
-    let playerWins = 0;
-    let computerWins = 0;
-    let draws = 0;
+let playerWins = 0;
+let computerWins = 0;
 
-    for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt("Enter your choice: ", "Choice")
-        const computerSelection = getComputerChoice();
-        const result = playRound(playerSelection, computerSelection);
-        if (result == 1) {
-            playerWins++;
-        } else if (result == -1) {
-            computerWins++;
-        } else if (result == 0) {
-            draws++;
-        }
+let selections = document.querySelector("#selections");
+selections.addEventListener('click', (event) => {
+    let target = event.target;
+    let result = NaN;
+
+    switch(target.id) {
+        case 'rock':
+            result = playRound('Rock', getComputerChoice());
+        case 'paper':
+            result = playRound('Paper', getComputerChoice());
+        case 'scissors':
+            result = playRound('Scissors', getComputerChoice());
     }
-    console.log(`Player Wins: ${playerWins}\nComputer Wins: ${computerWins}\nDraws: ${draws}`);
+});
+
+// Function to let the player know the result of their round
+function updateResult(resultMessage) {
+
 }
 
-playGame();
+// Function to update the running score of games won
+function updateScore(result) {
+
+}
+
