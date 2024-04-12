@@ -47,6 +47,7 @@ function playRound(playerSelection, computerSelection) {
 
 let playerWins = 0;
 let computerWins = 0;
+let draws = 0;
 
 let selections = document.querySelector("#selections");
 selections.addEventListener('click', (event) => {
@@ -56,14 +57,14 @@ selections.addEventListener('click', (event) => {
 
     switch(target.id) {
         case 'rock':
-            result = playRound('Rock', getComputerChoice());
+            updateScore(playRound('Rock', getComputerChoice()));
             break;
         case 'paper':
 
-            result = playRound('Paper', getComputerChoice());
+            updateScore(playRound('Paper', getComputerChoice()));
             break;
         case 'scissors':
-            result = playRound('Scissors', getComputerChoice());
+            updateScore(playRound('Scissors', getComputerChoice()));
             break;
     }
 });
@@ -76,6 +77,18 @@ function updateResult(resultMessage) {
 
 // Function to update the running score of games won
 function updateScore(result) {
-
+    let scoreText = document.querySelector("#score-text");
+    switch(result) {
+        case 1:
+            playerWins++;
+            break;
+        case -1:
+            computerWins++;
+            break;
+        case 0:
+            draws++;
+    }
+    let text = `Player Wins: ${playerWins} Computer Wins: ${computerWins} Draws: ${draws}`;
+    scoreText.textContent = text;
 }
 
