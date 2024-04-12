@@ -10,36 +10,36 @@ function getComputerChoice() {
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == "Rock") {
         if (computerSelection == "Rock") {
-            console.log("Draw!");
+            updateResult("Draw!");
             return 0;
         } else if (computerSelection == "Paper") {
-            console.log("You lose! Paper beats Rock!");
+            updateResult("You lose! Paper beats Rock!");
             return -1;
         } else if (computerSelection == "Scissors") {
-            console.log("You win! Rock beats Scissors!");
+            updateResult("You win! Rock beats Scissors!");
             return 1;
         }
     } else if (playerSelection == "Paper") {
         if (computerSelection == "Rock") {
-            console.log("You win! Paper beats Rock!");
+            updateResult("You win! Paper beats Rock!");
             return 1;
         } else if (computerSelection == "Paper") {
-            console.log("Draw");
+            updateResult("Draw");
             return 0;
         } else if (computerSelection == "Scissors") {
-            console.log("You lose! Scissors beats Paper!");
+            updateResult("You lose! Scissors beats Paper!");
             return -1;
         }
     }
     else if (playerSelection == "Scissors") {
         if (computerSelection == "Rock") {
-            console.log("You lose! Rock beats Scissors!");
+            updateResult("You lose! Rock beats Scissors!");
             return -1;
         } else if (computerSelection == "Paper") {
-            console.log("You win! Scissors beats Paper!");
+            updateResult("You win! Scissors beats Paper!");
             return 1;
         } else if (computerSelection == "Scissors") {
-            console.log("Draw!");
+            updateResult("Draw!");
             return 0;
         }
     }
@@ -51,21 +51,27 @@ let computerWins = 0;
 let selections = document.querySelector("#selections");
 selections.addEventListener('click', (event) => {
     let target = event.target;
+    console.log(target);
     let result = NaN;
 
     switch(target.id) {
         case 'rock':
             result = playRound('Rock', getComputerChoice());
+            break;
         case 'paper':
+
             result = playRound('Paper', getComputerChoice());
+            break;
         case 'scissors':
             result = playRound('Scissors', getComputerChoice());
+            break;
     }
 });
 
 // Function to let the player know the result of their round
 function updateResult(resultMessage) {
-
+    let resultText = document.querySelector("#result-text");
+    resultText.textContent = resultMessage;
 }
 
 // Function to update the running score of games won
